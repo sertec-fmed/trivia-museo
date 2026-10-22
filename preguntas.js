@@ -1,8 +1,9 @@
 // URL de tu Google Sheets publicado como CSV (reemplaza con tu link real)
-const SHEET_CSV_URL ="https://script.google.com/macros/s/AKfycbyitZZk-9qxOtuIWrkxhPbYoeJ8KRyt0oORXOXFSZ6-yqd1OxTEVDsT5s77vLRo_OWgGA/exec";
+const SHEET_CSV_URL =
+  "https://script.google.com/macros/s/AKfycbz0zfeNUucZc7LEki42mAOrVwvF4Dpk4fHg66VnbN1tGPlgEGxI_6uaqrG6CPriYrYI/exec";
 
 const URL_WEB_APP =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vSf7mN6wC1ybMOKz1DXWeVjk_kdH6nhXwJRnVDMFAkODkADBkO21aemrcWQkxDSLGZJnnZIdWlqF3d-/pub?gid=0&single=true&output=csv";
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vSxR5khOYaHreha63-QmafA51erModGXeEL2-Ycgh8kYsURMHZm5DIi7KD4ZBdc7w-mZ6El0-o2td8k/pub?gid=0&single=true&output=csv";
 
 // Preguntas de respaldo (Offline / Garantizadas)
 let preguntasRespaldo = [
@@ -48,19 +49,58 @@ const NOMBRE_MINIMO = 2;
 const NOMBRE_MAXIMO = 15;
 const MAX_APARICIONES_MISMO_NOMBRE_RANKING = 2;
 const PALABRAS_PROHIBIDAS = [
-  "asshole","ano",
-  "bitch", "boludo", "boluda", "boludos","boludas",  
-  "cojudos", "cojudas", "culo", "culos", "concha", "conchuda", "conchudo","cojudo", "cojuda", "choto", "chota", "chotos", "chotas",
-  "cabron", "cabrona", "cabrones", "carajo",
+  "asshole",
+  "ano",
+  "bitch",
+  "boludo",
+  "boluda",
+  "boludos",
+  "boludas",
+  "cojudos",
+  "cojudas",
+  "culo",
+  "culos",
+  "concha",
+  "conchuda",
+  "conchudo",
+  "cojudo",
+  "cojuda",
+  "choto",
+  "chota",
+  "chotos",
+  "chotas",
+  "cabron",
+  "cabrona",
+  "cabrones",
+  "carajo",
   "dick",
-  "elano",  
-  "forro", "forra", "forros", "forras", "fuck", "fucking",
-  "hdp", "hijodeputa", "hijaputa", 
+  "elano",
+  "forro",
+  "forra",
+  "forros",
+  "forras",
+  "fuck",
+  "fucking",
+  "hdp",
+  "hijodeputa",
+  "hijaputa",
   "joder",
-  "mierda", "mierdas",  
-  "pelotuda", "pelotudos", "pelotudas", "pija", "pijas", "pito", "puta", "puto", "putas", "putos", "pelotudo",  
-  "shit",    
-   "verga", "verg"
+  "mierda",
+  "mierdas",
+  "pelotuda",
+  "pelotudos",
+  "pelotudas",
+  "pija",
+  "pijas",
+  "pito",
+  "puta",
+  "puto",
+  "putas",
+  "putos",
+  "pelotudo",
+  "shit",
+  "verga",
+  "verg",
 ];
 
 // Inicialización al cargar la página
@@ -68,7 +108,7 @@ window.addEventListener("DOMContentLoaded", () => {
   // Intentar actualizar desde Google Sheets en segundo plano
   sincronizarGoogleSheets();
 
- const inputNombre = document.getElementById("nombre-jugador");
+  const inputNombre = document.getElementById("nombre-jugador");
   const btnComenzar = document.getElementById("btn-comenzar");
 
   inputNombre.addEventListener("input", () => {
@@ -525,9 +565,10 @@ function finalizarTrivia() {
 
   const puntajeFinal = Math.min(100, Math.round(puntajeActual));
   const totalPreguntas = preguntasPartida.length;
-  const porcentaje = totalPreguntas > 0
-    ? Math.round((respuestasCorrectas / totalPreguntas) * 100)
-    : 0;
+  const porcentaje =
+    totalPreguntas > 0
+      ? Math.round((respuestasCorrectas / totalPreguntas) * 100)
+      : 0;
   const tiempoTotal = Math.round(tiempoTotalRespuesta * 10) / 10;
   const categoria = obtenerCategoria(puntajeFinal);
 
@@ -537,8 +578,7 @@ function finalizarTrivia() {
       : `🎓 ¡Felicitaciones, ${nombreJugador}!`;
   document.getElementById("resultado-categoria").textContent =
     `Obtuviste ${respuestasCorrectas}/${totalPreguntas} respuestas correctas`;
-  document.getElementById("resultado-detalle").textContent =
-    `🏆 ${categoria}`;
+  document.getElementById("resultado-detalle").textContent = `🏆 ${categoria}`;
   document.getElementById("resultado-tiempo").textContent =
     `⏱️ Tiempo: ${new Intl.NumberFormat("es-AR", {
       minimumFractionDigits: 1,
@@ -565,10 +605,10 @@ function finalizarTrivia() {
 
 function obtenerCategoria(puntos) {
   if (puntos <= 50) return "🗺️ Visitante curioso";
-  if (puntos > 50 && puntos <=60 ) return "🔎 Explorador";
-  if (puntos > 60 && puntos <=80 ) return "🧭 Explorador avanzado";
-  if (puntos > 80 && puntos <=90 ) return "🎓 Experto del museo";
-    return "👑 Maestro del museo";
+  if (puntos > 50 && puntos <= 60) return "🔎 Explorador";
+  if (puntos > 60 && puntos <= 80) return "🧭 Explorador avanzado";
+  if (puntos > 80 && puntos <= 90) return "🎓 Experto del museo";
+  return "👑 Maestro del museo";
 }
 
 async function guardarPuntajeEnRanking(
@@ -595,7 +635,7 @@ async function guardarPuntajeEnRanking(
   estadoGuardado.textContent = "Enviando el resultado a Google Sheets...";
 
   try {
-    await fetch(SHEET_CSV_URL , {
+    await fetch(SHEET_CSV_URL, {
       method: "POST",
       mode: "no-cors",
       headers: {
@@ -717,7 +757,9 @@ async function actualizarRankingTiemposVisual() {
   estado.textContent = "⏳ Cargando ranking global...";
 
   try {
-    const respuesta = await fetch(`${SHEET_CSV_URL}?tipo=ranking&ts=${Date.now()}`);
+    const respuesta = await fetch(
+      `${SHEET_CSV_URL}?tipo=ranking&ts=${Date.now()}`,
+    );
 
     if (!respuesta.ok) {
       throw new Error(`HTTP ${respuesta.status}`);
@@ -745,11 +787,14 @@ async function actualizarRankingTiemposVisual() {
       const cantidadPreguntas = Number(partida.cantidad_preguntas);
 
       const medalla = index === 0 ? "🥇" : index === 1 ? "🥈" : "🥉";
-      const tiempoTexto = Number.isFinite(tiempo) ? `${tiempo.toFixed(1)} s` : "—";
-      const puntajeTexto = Number.isFinite(puntaje) ? `${puntaje} pts` : "—";
-      const aciertosTexto = Number.isFinite(correctas) && Number.isFinite(cantidadPreguntas)
-        ? `${correctas}/${cantidadPreguntas}`
+      const tiempoTexto = Number.isFinite(tiempo)
+        ? `${tiempo.toFixed(1)} s`
         : "—";
+      const puntajeTexto = Number.isFinite(puntaje) ? `${puntaje} pts` : "—";
+      const aciertosTexto =
+        Number.isFinite(correctas) && Number.isFinite(cantidadPreguntas)
+          ? `${correctas}/${cantidadPreguntas}`
+          : "—";
 
       tarjeta.innerHTML = `
         <div class="podio-medalla">${medalla}</div>
@@ -758,7 +803,8 @@ async function actualizarRankingTiemposVisual() {
         <div class="podio-puntaje">${puntajeTexto}</div>
         <div class="podio-detalle">${aciertosTexto} · ${tiempoTexto}</div>
       `;
-      tarjeta.querySelector(".podio-nombre").textContent = partida.nombre || "Visitante";
+      tarjeta.querySelector(".podio-nombre").textContent =
+        partida.nombre || "Visitante";
       podio.appendChild(tarjeta);
     });
 
@@ -773,11 +819,14 @@ async function actualizarRankingTiemposVisual() {
       const cantidadPreguntas = Number(partida.cantidad_preguntas);
 
       const posicion = index + 4;
-      const tiempoTexto = Number.isFinite(tiempo) ? `${tiempo.toFixed(1)} s` : "—";
-      const puntajeTexto = Number.isFinite(puntaje) ? `${puntaje} pts` : "—";
-      const aciertosTexto = Number.isFinite(correctas) && Number.isFinite(cantidadPreguntas)
-        ? `${correctas}/${cantidadPreguntas}`
+      const tiempoTexto = Number.isFinite(tiempo)
+        ? `${tiempo.toFixed(1)} s`
         : "—";
+      const puntajeTexto = Number.isFinite(puntaje) ? `${puntaje} pts` : "—";
+      const aciertosTexto =
+        Number.isFinite(correctas) && Number.isFinite(cantidadPreguntas)
+          ? `${correctas}/${cantidadPreguntas}`
+          : "—";
 
       item.innerHTML = `
         <span class="ranking-posicion">${posicion}</span>
@@ -785,14 +834,16 @@ async function actualizarRankingTiemposVisual() {
         <span class="ranking-puntaje">${puntajeTexto}</span>
         <span class="ranking-meta">${aciertosTexto} · ${tiempoTexto}</span>
       `;
-      item.querySelector(".ranking-nombre").textContent = partida.nombre || "Visitante";
+      item.querySelector(".ranking-nombre").textContent =
+        partida.nombre || "Visitante";
       lista.appendChild(item);
     });
 
     estado.textContent = `Ranking global · ${top10.length} ${top10.length === 1 ? "resultado destacado" : "resultados destacados"}`;
   } catch (error) {
     console.error("No se pudo cargar el ranking global.", error);
-    estado.textContent = "⚠️ No se pudo cargar el ranking global. Revisá la conexión e intentá nuevamente.";
+    estado.textContent =
+      "⚠️ No se pudo cargar el ranking global. Revisá la conexión e intentá nuevamente.";
   }
 }
 
@@ -805,5 +856,6 @@ function mostrarRankingTiempos(pantallaOrigen) {
 
 function volverDesdeRankingTiempos() {
   document.getElementById("pantalla-ranking-tiempos").style.display = "none";
-  document.getElementById(pantallaAnteriorRankingTiempos).style.display = "block";
+  document.getElementById(pantallaAnteriorRankingTiempos).style.display =
+    "block";
 }
