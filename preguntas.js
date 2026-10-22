@@ -1,6 +1,6 @@
 // URL de tu Google Sheets publicado como CSV (reemplaza con tu link real)
 const SHEET_CSV_URL =
-  "https://script.google.com/macros/s/AKfycbz0zfeNUucZc7LEki42mAOrVwvF4Dpk4fHg66VnbN1tGPlgEGxI_6uaqrG6CPriYrYI/exec";
+  "https://script.google.com/macros/s/AKfycbyjcbMQtLozRZ99xHKIiKzR17k_KSUp8u3wE8X7IJmgrw93RRqdNUYfbNULxSxYZabI/exec";
 
 const URL_WEB_APP =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vSxR5khOYaHreha63-QmafA51erModGXeEL2-Ycgh8kYsURMHZm5DIi7KD4ZBdc7w-mZ6El0-o2td8k/pub?gid=0&single=true&output=csv";
