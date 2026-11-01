@@ -506,7 +506,6 @@
         <ol class="ranking-list" id="ranking-list"></ol>
       </div>
     </section>
-
     <script>
       // Pantallas publicitarias y contenidos educativos. La trivia y su codigo no se modifican.
       const welcomeScreen = document.getElementById("welcome");
@@ -514,10 +513,13 @@
       const rankingScreen = document.getElementById("ranking");
       const screens = [welcomeScreen, playScreen, rankingScreen];
       const intervalMs = 15000;
+
       const rankingUrl =
         "https://script.google.com/macros/s/AKfycbyjcbMQtLozRZ99xHKIiKzR17k_KSUp8u3wE8X7IJmgrw93RRqdNUYfbNULxSxYZabI/exec";
+
       const questionsCsvUrl =
         "https://docs.google.com/spreadsheets/d/e/2PACX-1vSxR5khOYaHreha63-QmafA51erModGXeEL2-Ycgh8kYsURMHZm5DIi7KD4ZBdc7w-mZ6El0-o2td8k/pub?gid=0&single=true&output=csv";
+
       let timer;
       let rankingRequest = 0;
       let rotation = [];
