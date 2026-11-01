@@ -244,6 +244,140 @@
       .ranking-list:empty {
         display: none;
       }
+
+      /* Tarjetas educativas basadas exclusivamente en la hoja Preguntas de Google Sheets */
+      .learning-card {
+        width: min(92vw, 1180px);
+        max-height: 92vh;
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
+        gap: clamp(22px, 4vw, 58px);
+        align-items: center;
+        border: 1px solid rgba(231, 189, 114, 0.65);
+        padding: clamp(22px, 4vw, 56px);
+        box-shadow:
+          0 0 0 8px rgba(231, 189, 114, 0.04),
+          0 20px 70px #0005;
+        background: linear-gradient(
+          135deg,
+          rgba(18, 50, 74, 0.98),
+          rgba(6, 27, 45, 0.98)
+        );
+      }
+      .learning-copy {
+        min-width: 0;
+      }
+      .learning-label {
+        font:
+          700 clamp(12px, 1.5vw, 18px) Arial,
+          sans-serif;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: clamp(12px, 2vh, 22px);
+      }
+      .learning-question {
+        font-size: clamp(27px, 4.1vw, 54px);
+        line-height: 1.13;
+        font-weight: normal;
+        margin: 0 0 0.6em;
+        color: var(--cream);
+        overflow-wrap: anywhere;
+      }
+      .learning-answer {
+        font-size: clamp(24px, 3.5vw, 44px);
+        line-height: 1.15;
+        color: var(--gold);
+        margin: 0.2em 0 0.45em;
+      }
+      .learning-explanation {
+        font:
+          clamp(17px, 2vw, 25px)/1.45 Arial,
+          sans-serif;
+        color: #f5ead6;
+        margin: 0;
+        overflow-wrap: anywhere;
+      }
+      .learning-image-wrap {
+        width: 100%;
+        height: min(52vh, 520px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(231, 189, 114, 0.25);
+        padding: 10px;
+      }
+      .learning-image {
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+      }
+      .learning-image-placeholder {
+        font:
+          clamp(15px, 2vw, 22px) Arial,
+          sans-serif;
+        color: #d8c8ac;
+        text-align: center;
+        padding: 20px;
+      }
+      .learning-progress {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 5px;
+        background: var(--gold);
+        width: 100%;
+        transform-origin: left;
+        animation: learningCountdown 15s linear forwards;
+      }
+      @keyframes learningCountdown {
+        from {
+          transform: scaleX(1);
+        }
+        to {
+          transform: scaleX(0);
+        }
+      }
+      .learning-footer {
+        position: absolute;
+        bottom: 2vh;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font:
+          11px Arial,
+          sans-serif;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #c9b28e;
+        opacity: 0.8;
+      }
+      @media (orientation: portrait) {
+        .learning-card {
+          grid-template-columns: 1fr;
+          gap: 18px;
+          text-align: center;
+          padding: 5vw 7vw;
+          max-height: 96vh;
+        }
+        .learning-question {
+          font-size: clamp(25px, 6vw, 42px);
+        }
+        .learning-answer {
+          font-size: clamp(23px, 5vw, 36px);
+        }
+        .learning-explanation {
+          font-size: clamp(15px, 3.5vw, 21px);
+        }
+        .learning-image-wrap {
+          height: min(32vh, 300px);
+        }
+        .learning-footer {
+          font-size: 9px;
+        }
+      }
       @media (orientation: portrait) {
         .screen {
           padding: 2vw;
@@ -372,21 +506,25 @@
         <ol class="ranking-list" id="ranking-list"></ol>
       </div>
     </section>
-    <script>
-      // Alterna entre las pantallas publicitarias y el ranking global.
-      const screens = [
-        document.getElementById("welcome"),
-        document.getElementById("play"),
-        document.getElementById("ranking"),
-      ];
-      let current = 0;
-      const intervalMs = 15000;
 
+    <script>
+      // Pantallas publicitarias y contenidos educativos. La trivia y su codigo no se modifican.
+      const welcomeScreen = document.getElementById("welcome");
+      const playScreen = document.getElementById("play");
+      const rankingScreen = document.getElementById("ranking");
+      const screens = [welcomeScreen, playScreen, rankingScreen];
+      const intervalMs = 15000;
       const rankingUrl =
         "https://script.google.com/macros/s/AKfycbyjcbMQtLozRZ99xHKIiKzR17k_KSUp8u3wE8X7IJmgrw93RRqdNUYfbNULxSxYZabI/exec";
-
+      const questionsCsvUrl =
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vSxR5khOYaHreha63-QmafA51erModGXeEL2-Ycgh8kYsURMHZm5DIi7KD4ZBdc7w-mZ6El0-o2td8k/pub?gid=0&single=true&output=csv";
       let timer;
       let rankingRequest = 0;
+      let rotation = [];
+      let rotationIndex = 0;
+      let educationalScreens = [];
+      let questionsLoaded = false;
+
       async function loadRanking() {
         const request = ++rankingRequest;
         const status = document.getElementById("ranking-status");
@@ -430,9 +568,9 @@
             score.textContent = Number.isFinite(points) ? `${points} pts` : "—";
             const details = document.createElement("span");
             details.className = "ranking-details";
-            const correct = Number(entry.correctas);
-            const questions = Number(entry.cantidad_preguntas);
-            const seconds = Number(entry.tiempo);
+            const correct = Number(entry.correctas),
+              questions = Number(entry.cantidad_preguntas),
+              seconds = Number(entry.tiempo);
             const accuracy =
               Number.isFinite(correct) && Number.isFinite(questions)
                 ? `${correct}/${questions} aciertos`
@@ -452,27 +590,215 @@
             "⚠️ No se pudo cargar el ranking global. Revisá la conexión.";
         }
       }
-      function show(i) {
-        current = i;
-        screens.forEach((s, n) => s.classList.toggle("active", n === i));
-        if (i === 2) loadRanking();
-        clearTimeout(timer);
-        timer = setTimeout(
-          () => show((current + 1) % screens.length),
-          intervalMs,
-        );
+
+      // Parser CSV que respeta comas y comillas dentro de las celdas.
+      function parseCSV(text) {
+        const rows = [];
+        let row = [],
+          field = "",
+          quoted = false;
+        for (let i = 0; i < text.length; i++) {
+          const ch = text[i],
+            next = text[i + 1];
+          if (ch === '"' && quoted && next === '"') {
+            field += '"';
+            i++;
+          } else if (ch === '"') quoted = !quoted;
+          else if (ch === "," && !quoted) {
+            row.push(field);
+            field = "";
+          } else if ((ch === "\n" || ch === "\r") && !quoted) {
+            if (ch === "\r" && next === "\n") i++;
+            row.push(field);
+            if (row.some((cell) => cell.trim() !== "")) rows.push(row);
+            row = [];
+            field = "";
+          } else field += ch;
+        }
+        if (field.length || row.length) {
+          row.push(field);
+          if (row.some((cell) => cell.trim() !== "")) rows.push(row);
+        }
+        return rows;
       }
-      document.addEventListener("click", () =>
-        show((current + 1) % screens.length),
-      );
+      function escapeText(value) {
+        return String(value ?? "").trim();
+      }
+      function resolveImage(value) {
+        const raw = escapeText(value);
+        if (!raw) return "";
+        if (/^(https?:)?\/\//i.test(raw) || raw.startsWith("data:")) return raw;
+        return `imagenes/${raw.replace(/^\.\//, "").replace(/^imagenes\//, "")}`;
+      }
+      function buildQuestionObjects(csvText) {
+        const rows = parseCSV(csvText);
+        if (rows.length < 2) return [];
+        return rows
+          .slice(1)
+          .map((cols, idx) => {
+            const answerNumber = Number.parseInt(escapeText(cols[5]), 10);
+            const options = [cols[2], cols[3], cols[4]].map(escapeText);
+            const answer =
+              answerNumber >= 1 && answerNumber <= 3
+                ? options[answerNumber - 1]
+                : "";
+            return {
+              id: escapeText(cols[0]) || String(idx + 1),
+              question: escapeText(cols[1]),
+              answer,
+              explanation: escapeText(cols[6]),
+              image: resolveImage(cols[7]),
+            };
+          })
+          .filter((q) => q.question && (q.answer || q.explanation));
+      }
+      function createLearningScreen(question, mode) {
+        const section = document.createElement("section");
+        section.className = "screen learning-screen";
+        section.setAttribute(
+          "aria-label",
+          mode === "question"
+            ? "Pista de la trivia"
+            : "Respuesta y explicación de la trivia",
+        );
+        const card = document.createElement("div");
+        card.className = "learning-card";
+        const copy = document.createElement("div");
+        copy.className = "learning-copy";
+        const label = document.createElement("div");
+        label.className = "learning-label";
+        const title = document.createElement("h2");
+        title.className = "learning-question";
+        const answer = document.createElement("p");
+        answer.className = "learning-answer";
+        const explanation = document.createElement("p");
+        explanation.className = "learning-explanation";
+        const imageWrap = document.createElement("div");
+        imageWrap.className = "learning-image-wrap";
+        if (question.image) {
+          const img = document.createElement("img");
+          img.className = "learning-image";
+          img.src = question.image;
+          img.alt = "Imagen asociada a una pregunta de la trivia";
+          img.loading = "eager";
+          img.onerror = () => {
+            img.remove();
+            const placeholder = document.createElement("div");
+            placeholder.className = "learning-image-placeholder";
+            placeholder.textContent = "Museos · Facultad de Medicina";
+            imageWrap.append(placeholder);
+          };
+          imageWrap.append(img);
+        } else {
+          const placeholder = document.createElement("div");
+          placeholder.className = "learning-image-placeholder";
+          placeholder.textContent = "Museos · Facultad de Medicina";
+          imageWrap.append(placeholder);
+        }
+        if (mode === "question") {
+          label.textContent = "Pista para explorar";
+          title.textContent = question.question;
+          explanation.textContent =
+            "¿Conocés la respuesta? Muy pronto vas a descubrirla.";
+          answer.hidden = true;
+        } else {
+          label.textContent = "La respuesta";
+          title.textContent = question.question;
+          answer.textContent = question.answer
+            ? `Respuesta: ${question.answer}`
+            : "";
+          answer.hidden = !question.answer;
+          explanation.textContent =
+            question.explanation ||
+            "¡Seguí explorando la historia de la medicina en nuestros museos!";
+        }
+        copy.append(label, title, answer, explanation);
+        card.append(copy, imageWrap);
+        section.append(card);
+        const footer = document.createElement("div");
+        footer.className = "learning-footer";
+        footer.textContent = "Trivia · Museos · Facultad de Medicina";
+        section.append(footer);
+        const progress = document.createElement("div");
+        progress.className = "learning-progress";
+        section.append(progress);
+        document.body.append(section);
+        educationalScreens.push(section);
+        return section;
+      }
+      function buildRotation(questions) {
+        // Intercalamos la pregunta, otras pantallas publicitarias y luego su respuesta.
+        // Se conserva la bienvenida, la invitación a jugar y el ranking originales.
+        const slides = [welcomeScreen, playScreen];
+        if (questions.length) {
+          const selected = questions
+            .slice()
+            .sort(() => Math.random() - 0.5)
+            .slice(0, Math.min(10, questions.length));
+          selected.forEach((q) => {
+            slides.push(createLearningScreen(q, "question"));
+            slides.push(rankingScreen);
+            slides.push(createLearningScreen(q, "answer"));
+            slides.push(playScreen);
+          });
+        }
+        slides.push(rankingScreen);
+        rotation = slides;
+        rotationIndex = 0;
+      }
+      async function loadQuestionsForAdvertising() {
+        try {
+          const response = await fetch(`${questionsCsvUrl}&ts=${Date.now()}`, {
+            cache: "no-store",
+          });
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const csv = await response.text();
+          const questions = buildQuestionObjects(csv);
+          if (!questions.length)
+            throw new Error("No se encontraron preguntas válidas.");
+          buildRotation(questions);
+        } catch (error) {
+          console.warn(
+            "No se pudieron cargar preguntas para publicidad. Se mostrarán las tres pantallas habituales.",
+            error,
+          );
+          rotation = [welcomeScreen, playScreen, rankingScreen];
+        } finally {
+          questionsLoaded = true;
+        }
+      }
+      function showNext() {
+        if (!questionsLoaded) {
+          timer = setTimeout(showNext, 500);
+          return;
+        }
+        const screen = rotation[rotationIndex % rotation.length];
+        document
+          .querySelectorAll(".screen")
+          .forEach((s) => s.classList.toggle("active", s === screen));
+        if (screen === rankingScreen) loadRanking();
+        rotationIndex = (rotationIndex + 1) % rotation.length;
+        clearTimeout(timer);
+        timer = setTimeout(showNext, intervalMs);
+      }
+      document.addEventListener("click", () => {
+        clearTimeout(timer);
+        showNext();
+      });
       document.addEventListener("keydown", (e) => {
         if (e.key === "ArrowRight" || e.key === " ") {
           e.preventDefault();
-          show((current + 1) % screens.length);
-        } else if (e.key === "ArrowLeft")
-          show((current + screens.length - 1) % screens.length);
+          clearTimeout(timer);
+          showNext();
+        } else if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          clearTimeout(timer);
+          rotationIndex =
+            (rotationIndex - 2 + rotation.length) % rotation.length;
+          showNext();
+        }
       });
-      timer = setTimeout(() => show(1), intervalMs);
+      loadQuestionsForAdvertising().then(() => showNext());
     </script>
   </body>
 </html>
