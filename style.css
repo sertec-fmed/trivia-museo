@@ -140,7 +140,21 @@ button {
 }
 
 #pantalla-ranking-tiempos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   max-width: 760px;
+  color: var(--azul);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#pantalla-ranking-tiempos #btn-volver-ranking-tiempos {
+  background: #f47721;
+  color: #fff;
+}
+
+#pantalla-ranking-tiempos #btn-volver-ranking-tiempos:hover {
+  background: #df6414;
 }
 
 .ranking-encabezado {
@@ -508,6 +522,7 @@ button {
   width: min(100%, 680px);
   margin: 24px auto;
   color: var(--azul);
+  font-family: Arial, Helvetica, sans-serif;
   font-size: clamp(25px, 5vw, 38px);
   font-weight: 700;
   line-height: 1.35;
@@ -515,7 +530,8 @@ button {
 
 #resultado-categoria {
   margin: 0 auto 12px;
-  color: var(--azul-secundario);
+  color: var(--azul);
+  font-family: Arial, Helvetica, sans-serif;
   font-size: clamp(18px, 4vw, 23px);
   font-weight: 700;
 }
@@ -524,20 +540,49 @@ button {
   width: min(100%, 720px);
   margin: 0 auto 16px;
   padding: 16px 20px;
-  border: 2px solid #a78bfa;
+  border: 2px solid var(--gris);
   border-radius: 16px;
-  background: linear-gradient(135deg, #ede9fe, #ddd6fe);
-  color: #4c1d95;
+  background: var(--gris);
+  color: var(--azul);
+  font-family: Arial, Helvetica, sans-serif;
   font-size: clamp(18px, 4vw, 22px);
   font-weight: 800;
-  box-shadow: 0 8px 20px rgb(109 40 217 / 12%);
+  box-shadow: 0 8px 20px rgb(23 32 42 / 12%);
+}
+
+#pantalla-final #btn-ver-ranking-tiempos-final {
+  background: #f47721;
+  color: #fff;
+}
+
+#pantalla-final #btn-ver-ranking-tiempos-final:hover {
+  background: #df6414;
 }
 
 #resultado-tiempo {
   margin: 0 auto 20px;
   color: var(--azul);
+  font-family: Arial, Helvetica, sans-serif;
   font-size: clamp(18px, 4vw, 22px);
   font-weight: 700;
+}
+
+#pantalla-final {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.banner-institucional {
+  width: 100%;
+  margin-top: auto;
+}
+
+.banner-institucional img {
+  display: block;
+  width: min(100%, 760px);
+  height: auto;
+  margin: 0 auto;
 }
 
 @media (min-width: 650px) {
@@ -560,6 +605,11 @@ button {
     min-height: calc(100vh - 12px);
     min-height: calc(100dvh - 12px);
     padding: 12px 10px;
+  }
+
+  #pantalla-final {
+    min-height: calc(100vh - 12px);
+    min-height: calc(100dvh - 12px);
   }
 
   #pantalla-juego {

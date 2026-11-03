@@ -561,7 +561,7 @@ function finalizarTrivia() {
   clearInterval(temporizadorPregunta);
   clearTimeout(temporizadorAvance);
   document.getElementById("pantalla-juego").style.display = "none";
-  document.getElementById("pantalla-final").style.display = "block";
+  document.getElementById("pantalla-final").style.display = "flex";
 
   const puntajeFinal = Math.min(100, Math.round(puntajeActual));
   const totalPreguntas = preguntasPartida.length;
@@ -850,12 +850,12 @@ async function actualizarRankingTiemposVisual() {
 function mostrarRankingTiempos(pantallaOrigen) {
   pantallaAnteriorRankingTiempos = pantallaOrigen;
   document.getElementById(pantallaOrigen).style.display = "none";
-  document.getElementById("pantalla-ranking-tiempos").style.display = "block";
+  document.getElementById("pantalla-ranking-tiempos").style.display = "flex";
   actualizarRankingTiemposVisual();
 }
 
 function volverDesdeRankingTiempos() {
   document.getElementById("pantalla-ranking-tiempos").style.display = "none";
   document.getElementById(pantallaAnteriorRankingTiempos).style.display =
-    "block";
+    pantallaAnteriorRankingTiempos === "pantalla-final" ? "flex" : "block";
 }

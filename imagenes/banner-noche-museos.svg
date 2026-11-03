@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="154" viewBox="0 0 1200 154" role="img" aria-labelledby="title">
+  <title id="title">La Noche de los Museos 2026 · .UBA Ciencias Médicas</title>
+  <rect width="1200" height="154" fill="#1d285b"/>
+
+  <g fill="#fff" font-family="Arial, Helvetica, sans-serif">
+    <text x="48" y="61" font-size="31" font-weight="400">La</text>
+    <text x="100" y="62" font-size="49" font-weight="900" letter-spacing="-2">NOCHE</text>
+    <text x="295" y="61" font-size="31" font-weight="400">de</text>
+    <text x="91" y="104" font-size="29" font-weight="400">los</text>
+    <text x="143" y="105" font-size="47" font-weight="900" letter-spacing="-2">MUSEOS</text>
+    <text x="294" y="137" text-anchor="middle" font-size="18" font-weight="400">2026</text>
+  </g>
+
+  <g fill="none" stroke="#fff" stroke-linecap="round" opacity=".82">
+    <path d="M455 40 488 65 520 45 558 77 592 51 630 79 670 49 710 70 751 40" stroke-dasharray="1 9" stroke-width="2"/>
+    <path d="M468 113 502 87 539 109 574 83 610 111 647 86 685 111 724 88" stroke-dasharray="1 10" stroke-width="2"/>
+  </g>
+  <g fill="#fff">
+    <circle cx="455" cy="40" r="4"/>
+    <circle cx="488" cy="65" r="3"/>
+    <circle cx="520" cy="45" r="5"/>
+    <circle cx="558" cy="77" r="3"/>
+    <circle cx="592" cy="51" r="6"/>
+    <circle cx="630" cy="79" r="4"/>
+    <circle cx="670" cy="49" r="5"/>
+    <circle cx="710" cy="70" r="3"/>
+    <circle cx="751" cy="40" r="4"/>
+    <circle cx="468" cy="113" r="3"/>
+    <circle cx="502" cy="87" r="5"/>
+    <circle cx="539" cy="109" r="3"/>
+    <circle cx="574" cy="83" r="4"/>
+    <circle cx="610" cy="111" r="6"/>
+    <circle cx="647" cy="86" r="3"/>
+    <circle cx="685" cy="111" r="5"/>
+    <circle cx="724" cy="88" r="3"/>
+    <circle cx="480" cy="27" r="2"/>
+    <circle cx="540" cy="27" r="2"/>
+    <circle cx="617" cy="27" r="2"/>
+    <circle cx="693" cy="28" r="2"/>
+    <circle cx="526" cy="134" r="2"/>
+    <circle cx="665" cy="132" r="2"/>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="770" y="94" fill="#fff" font-size="45" font-weight="700" letter-spacing="-1">.UBA</text>
+    <text x="877" y="94" fill="#f47721" font-size="38" font-weight="400" letter-spacing="-1.5" textLength="305" lengthAdjust="spacingAndGlyphs">CIENCIAS MÉDICAS</text>
+  </g>
+</svg>
