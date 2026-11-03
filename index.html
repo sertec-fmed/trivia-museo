@@ -9,38 +9,100 @@
   <body>
     <!-- Pantalla 1: Ingreso de Nombre -->
     <div id="pantalla-inicio" class="pantalla">
-      <h1>Trivia</h1>
-      <h2><strong>Facultad de Medicina</strong> - UBA</h2>
-      <p class="subtitulo">¿Cuánto sabés sobre la Facultad y sus Museos?</p>
-      <p class="detalle-juego">
-        Hasta 10 preguntas · 3 respuestas · 15 segundos por pregunta
-      </p>
-      <p class="detalle-juego">
-        Cada acierto suma puntos y una bonificación por rapidez.
-      </p>
-      <p class="etiqueta-nombre"><strong>Ingresá tu nombre</strong></p>
+      <svg
+        class="constelaciones-bienvenida"
+        viewBox="0 0 1000 800"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <g class="lineas-constelacion">
+          <path d="M25 92 92 48 154 82 206 30 264 64" />
+          <path d="M742 46 808 82 867 34 925 74 980 42" />
+          <path d="M24 300 58 354 32 414 79 470 36 532" />
+          <path d="M976 260 936 318 972 376 927 435 970 494" />
+          <path d="M32 692 92 730 148 682 207 742 267 708" />
+          <path d="M732 738 790 690 850 732 911 682 973 720" />
+        </g>
+        <g class="estrellas-constelacion">
+          <circle cx="25" cy="92" r="5" />
+          <circle cx="92" cy="48" r="3" />
+          <circle cx="154" cy="82" r="6" />
+          <circle cx="206" cy="30" r="4" />
+          <circle cx="264" cy="64" r="3" />
+          <circle cx="742" cy="46" r="4" />
+          <circle cx="808" cy="82" r="6" />
+          <circle cx="867" cy="34" r="3" />
+          <circle cx="925" cy="74" r="5" />
+          <circle cx="980" cy="42" r="4" />
+          <circle cx="24" cy="300" r="4" />
+          <circle cx="58" cy="354" r="3" />
+          <circle cx="32" cy="414" r="6" />
+          <circle cx="79" cy="470" r="4" />
+          <circle cx="36" cy="532" r="5" />
+          <circle cx="976" cy="260" r="5" />
+          <circle cx="936" cy="318" r="4" />
+          <circle cx="972" cy="376" r="3" />
+          <circle cx="927" cy="435" r="6" />
+          <circle cx="970" cy="494" r="4" />
+          <circle cx="32" cy="692" r="5" />
+          <circle cx="92" cy="730" r="3" />
+          <circle cx="148" cy="682" r="6" />
+          <circle cx="207" cy="742" r="4" />
+          <circle cx="267" cy="708" r="3" />
+          <circle cx="732" cy="738" r="4" />
+          <circle cx="790" cy="690" r="6" />
+          <circle cx="850" cy="732" r="3" />
+          <circle cx="911" cy="682" r="5" />
+          <circle cx="973" cy="720" r="4" />
+          <circle cx="340" cy="24" r="2" />
+          <circle cx="624" cy="28" r="3" />
+          <circle cx="14" cy="600" r="3" />
+          <circle cx="988" cy="570" r="2" />
+          <circle cx="330" cy="776" r="3" />
+          <circle cx="650" cy="770" r="2" />
+        </g>
+      </svg>
+      <div class="contenido-bienvenida">
+        <h1 class="titulo-bienvenida">
+          <span class="titulo-intro">BIENVENIDOS A</span>
+          <span class="titulo-la">La</span>
+          <span class="titulo-noche">NOCHE <span class="titulo-de">de</span></span>
+          <span class="titulo-museos"><span class="titulo-los">los</span> MUSEOS</span>
+          <span class="titulo-institucion">EN .UBA <span>CIENCIAS MÉDICAS</span></span>
+        </h1>
+        <p class="subtitulo">
+          ¿Cuánto sabés sobre la Facultad y sus Museos?
+        </p>
+        <p class="detalle-juego">
+          Hasta 10 preguntas · 3 respuestas · 15 segundos por pregunta
+        </p>
+        <p class="detalle-juego">
+          Cada acierto suma puntos y una bonificación por rapidez.
+        </p>
+        <p class="etiqueta-nombre"><strong>Ingresá tu nombre</strong></p>
 
-      <input
-        type="text"
-        id="nombre-jugador"
-        placeholder="Ej: Fer S."
-        maxlength="15"
-        minlength="2"
-        autocomplete="nickname"
-        aria-describedby="ayuda-nombre mensaje-nombre"
-        required
-      />
-      <p id="ayuda-nombre" class="ayuda-nombre">
-        Máximo 15 caracteres · Podés usar tu nombre o un apodo.
-      </p>
-      <p
-        id="mensaje-nombre"
-        class="mensaje-nombre"
-        role="alert"
-        aria-live="polite"
-      ></p>
-      <br />
-      <button id="btn-comenzar">¡Comenzar a Jugar!</button>
+        <input
+          type="text"
+          id="nombre-jugador"
+          placeholder="Ej: Fer S."
+          maxlength="15"
+          minlength="2"
+          autocomplete="nickname"
+          aria-describedby="ayuda-nombre mensaje-nombre"
+          required
+        />
+        <p id="ayuda-nombre" class="ayuda-nombre">
+          Máximo 15 caracteres · Podés usar tu nombre o un apodo.
+        </p>
+        <p
+          id="mensaje-nombre"
+          class="mensaje-nombre"
+          role="alert"
+          aria-live="polite"
+        ></p>
+        <button id="btn-comenzar">¡Comenzar a Jugar!</button>
+      </div>
     </div>
 
     <!-- Pantalla 2: El Juego (Oculto al inicio) -->

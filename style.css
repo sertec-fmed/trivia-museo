@@ -660,3 +660,153 @@ button {
   font-size: 0.95rem;
   opacity: 0.85;
 }
+
+#pantalla-inicio {
+  display: grid;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  place-items: center;
+  background: #1d285b;
+  color: #fff;
+}
+
+.constelaciones-bienvenida {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.lineas-constelacion {
+  fill: none;
+  stroke: rgb(255 255 255 / 55%);
+  stroke-dasharray: 1 11;
+  stroke-linecap: round;
+  stroke-width: 1.5;
+}
+
+.estrellas-constelacion {
+  fill: #fff;
+}
+
+.contenido-bienvenida {
+  position: relative;
+  width: min(100%, 740px);
+}
+
+.titulo-bienvenida {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 0 16px;
+  color: #fff;
+  font-family: "Arial Black", Arial, Helvetica, sans-serif;
+  font-style: italic;
+  font-weight: 900;
+  line-height: 0.94;
+  text-align: center;
+}
+
+.titulo-intro {
+  margin-bottom: 4px;
+  font-size: clamp(20px, 3.3vw, 32px);
+  letter-spacing: 0.04em;
+}
+
+.titulo-la {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(26px, 4vw, 40px);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.titulo-noche,
+.titulo-museos {
+  font-size: clamp(46px, 9vw, 84px);
+  letter-spacing: -0.045em;
+  white-space: nowrap;
+}
+
+.titulo-de,
+.titulo-los {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.57em;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.titulo-institucion {
+  margin-top: 10px;
+  font-size: clamp(17px, 3.1vw, 27px);
+  letter-spacing: -0.035em;
+  white-space: nowrap;
+}
+
+.titulo-institucion span {
+  color: #ff7b28;
+}
+
+#pantalla-inicio .subtitulo {
+  margin: 12px 0 6px;
+  color: #e2e8f0;
+  font-weight: 700;
+}
+
+#pantalla-inicio .detalle-juego {
+  margin: 2px 0;
+  color: #d3daf1;
+}
+
+#pantalla-inicio .etiqueta-nombre {
+  margin: 14px 0 4px;
+  color: #fff;
+}
+
+#pantalla-inicio #nombre-jugador {
+  border-color: #d3daf1;
+}
+
+#pantalla-inicio #nombre-jugador:focus-visible,
+#pantalla-inicio button:focus-visible {
+  outline-color: #ff9a54;
+}
+
+#pantalla-inicio .ayuda-nombre {
+  color: #d3daf1;
+}
+
+#pantalla-inicio .mensaje-nombre.error {
+  color: #ffaaa6;
+}
+
+#pantalla-inicio .mensaje-nombre.exito {
+  color: #a7f3d0;
+}
+
+#pantalla-inicio #btn-comenzar {
+  margin: 14px auto 0;
+  background: #f47721;
+}
+
+#pantalla-inicio #btn-comenzar:hover {
+  background: #df6414;
+}
+
+@media (max-width: 420px) {
+  #pantalla-inicio {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .titulo-noche,
+  .titulo-museos {
+    font-size: clamp(40px, 10.5vw, 46px);
+  }
+
+  .titulo-institucion {
+    font-size: clamp(15px, 4.1vw, 17px);
+  }
+}
