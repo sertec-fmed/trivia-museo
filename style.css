@@ -409,7 +409,11 @@ button {
 
 #texto-pregunta {
   margin: 20px 0;
+  color: #1d285b;
+  font-family: "Arial Black", Arial, Helvetica, sans-serif;
   font-size: clamp(24px, 5vw, 35px);
+  font-style: normal;
+  font-weight: 900;
   line-height: 1.25;
 }
 
@@ -449,9 +453,11 @@ button {
   min-height: 72px;
   padding: 17px;
   background: var(--gris);
-  color: var(--texto);
+  color: #1d285b;
+  font-family: "Arial Black", Arial, Helvetica, sans-serif;
   font-size: clamp(18px, 4vw, 24px);
-  font-weight: 700;
+  font-style: normal;
+  font-weight: 900;
   text-align: left;
   transition:
     background-color 150ms ease,
@@ -482,7 +488,7 @@ button {
   background: rgb(255 251 235 / 96%);
   box-shadow: 0 4px 14px rgb(0 0 0 / 28%);
   backdrop-filter: blur(6px);
-  color: #713f12;
+  color: #f47721;
   font-size: clamp(15px, 3vw, 18px);
   font-weight: 600;
   line-height: 1.4;
@@ -492,7 +498,7 @@ button {
 #explicacion-texto::before {
   display: block;
   margin-bottom: 6px;
-  color: #92400e;
+  color: #f47721;
   content: "💡 Explicación";
   font-size: 17px;
   font-weight: 700;
