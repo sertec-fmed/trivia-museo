@@ -660,7 +660,8 @@ function finalizarTrivia() {
       : `🎓 ¡Felicitaciones, ${nombreJugador}!`;
   document.getElementById("resultado-categoria").textContent =
     `Obtuviste ${respuestasCorrectas}/${totalPreguntas} respuestas correctas`;
-  document.getElementById("resultado-detalle").textContent = `🏆 ${categoria}`;
+  document.getElementById("resultado-detalle").textContent =
+    `🏆 Puntaje: ${puntajeFinal} puntos · ${categoria} de una noche en el museo`;
   document.getElementById("resultado-tiempo").textContent =
     `⏱️ Tiempo: ${new Intl.NumberFormat("es-AR", {
       minimumFractionDigits: 1,
@@ -686,11 +687,11 @@ function finalizarTrivia() {
 }
 
 function obtenerCategoria(puntos) {
-  if (puntos <= 50) return "🗺️ Visitante curioso";
-  if (puntos > 50 && puntos <= 60) return "🔎 Explorador";
+  if (puntos <= 50) return "🗺️ Explorador novato";
+  if (puntos > 50 && puntos <= 60) return "🔎 Explorador intermedio";
   if (puntos > 60 && puntos <= 80) return "🧭 Explorador avanzado";
-  if (puntos > 80 && puntos <= 90) return "🎓 Experto del museo";
-  return "👑 Maestro del museo";
+  if (puntos > 80 && puntos <= 90) return "🎓 Explorador experto";
+  return "👑 Explorador maestro";
 }
 
 async function guardarPuntajeEnRanking(
