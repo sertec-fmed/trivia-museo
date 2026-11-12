@@ -83,8 +83,8 @@ let preguntasRespaldo = [
     pregunta: "¿De qué animal es el hueso más grande que hay en el Museo? ",
     opciones: ["Mono", "Elefante", "Ballena"],
     correcta: 2,
-    explicacion: "El hueso más grande es de una ballena.",
-    imagen: "imagenes/ballena.jpg",
+    explicacion: "El hueso más grande es de un elefante.",
+    imagen: "imagenes/elefante.jpg",
   },
   {
     id: 9,
