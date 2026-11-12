@@ -10,7 +10,7 @@ let preguntasRespaldo = [
   {
     id: 1,
     pregunta:
-      "¿En qué año fue creada formalmente la Facultad de Medicina de la UBA?",
+      "¿En qué año fue creada formalmente la Facultad de Ciencias Médicas de la UBA?",
     opciones: ["1821", "1852", "1887"],
     correcta: 1, // Índice 1 = segunda opción (1852)
     explicacion: "Fue creada formalmente en 1852.",
@@ -103,7 +103,8 @@ let preguntasRespaldo = [
       "Dra. Julieta Lanteri",
     ],
     correcta: 1,
-    explicacion: "La primera médica de Argentina y de América del Sur.",
+    explicacion:
+      "La Dra Cecilia Grierson graduada en 1889 fue la primera médica de Argentina y de sudamérica.",
     imagen: "imagenes/cecilia.jpg",
   },
   // Puedes agregar el resto de tus preguntas aquí o dejarlas sincronizar desde Sheets
