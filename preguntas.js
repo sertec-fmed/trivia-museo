@@ -658,7 +658,11 @@ function finalizarTrivia() {
       ? Math.round((respuestasCorrectas / totalPreguntas) * 100)
       : 0;
   const tiempoTotal = Math.round(tiempoTotalRespuesta * 10) / 10;
-  const categoria = obtenerCategoria(puntajeFinal);
+  const categoria = obtenerCategoria(
+    puntajeFinal,
+    respuestasCorrectas,
+    totalPreguntas,
+  );
 
   document.getElementById("resultado-final").textContent =
     puntajeFinal <= 50
@@ -692,12 +696,14 @@ function finalizarTrivia() {
   );
 }
 
-function obtenerCategoria(puntos) {
-  if (puntos <= 50) return "🗺️ Explorador novato";
-  if (puntos > 50 && puntos <= 60) return "🔎 Explorador intermedio";
-  if (puntos > 60 && puntos <= 80) return "🧭 Explorador avanzado";
-  if (puntos > 80 && puntos <= 90) return "🎓 Explorador experto";
-  return "👑 Explorador maestro";
+function obtenerCategoria(puntos, correctas, totalPreguntas) {
+  if (correctas === 10 && totalPreguntas === 10) {
+    return "👑 Explorador maestro";
+  }
+  if (puntos < 50) return "🗺️ Explorador novato";
+  if (puntos >= 50 && puntos < 60) return "🔎 Explorador intermedio";
+  if (puntos >= 60 && puntos < 80) return "🧭 Explorador avanzado";
+  return "🎓 Explorador experto";
 }
 
 async function guardarPuntajeEnRanking(
@@ -752,6 +758,8 @@ function guardarEnRanking(nombre, puntos, porcentaje, tiempo, categoria) {
     puntos,
     porcentaje,
     tiempo,
+    correctas: respuestasCorrectas,
+    totalPreguntas: preguntasPartida.length,
     categoria,
   });
 
@@ -789,7 +797,11 @@ function actualizarRankingVisual() {
   lista.innerHTML = "";
   ranking.forEach((item, index) => {
     let li = document.createElement("li");
-    const categoria = item.categoria || obtenerCategoria(item.puntos);
+    const categoria = obtenerCategoria(
+      item.puntos,
+      item.correctas,
+      item.totalPreguntas,
+    );
     const detalle = Number.isFinite(item.porcentaje)
       ? ` · ${item.porcentaje}% · ${item.tiempo} s`
       : "";
