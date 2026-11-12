@@ -662,7 +662,7 @@ function finalizarTrivia() {
   document.getElementById("resultado-categoria").textContent =
     `Obtuviste ${respuestasCorrectas}/${totalPreguntas} respuestas correctas`;
   document.getElementById("resultado-detalle").textContent =
-    `🏆 Puntaje: ${puntajeFinal} puntos · ${categoria} de una noche en el museo`;
+    `🏆 Puntaje: ${puntajeFinal} puntos · ${categoria} de la noche de los museos`;
   document.getElementById("resultado-tiempo").textContent =
     `⏱️ Tiempo: ${new Intl.NumberFormat("es-AR", {
       minimumFractionDigits: 1,
