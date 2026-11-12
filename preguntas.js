@@ -126,6 +126,8 @@ let pantallaAnteriorRankingTiempos = "pantalla-inicio";
 let solicitudRankingGlobal = 0;
 const TIEMPO_POR_PREGUNTA = 15;
 const TIEMPO_EXPLICACION = 4000;
+const PESO_ACIERTO = 0.9;
+const PESO_RAPIDEZ = 0.1;
 
 // Reglas para el nombre del participante
 const NOMBRE_MINIMO = 2;
@@ -542,11 +544,14 @@ function evaluarRespuesta(elegida, correcta) {
   if (elegida === correcta) {
     const puntosMaximosPregunta = 100 / preguntasPartida.length;
     const bonusRapidez =
-      puntosMaximosPregunta * 0.5 * (1 - tiempoRespuesta / TIEMPO_POR_PREGUNTA);
-    puntajeActual += puntosMaximosPregunta * 0.5 + bonusRapidez;
+      puntosMaximosPregunta *
+      PESO_RAPIDEZ *
+      (1 - tiempoRespuesta / TIEMPO_POR_PREGUNTA);
+    const puntosPorAcierto = puntosMaximosPregunta * PESO_ACIERTO;
+    puntajeActual += puntosPorAcierto + bonusRapidez;
     respuestasCorrectas++;
     botones[elegida].style.backgroundColor = "#4CAF50"; // Verde
-    mensajeExplicacion = `¡Correcto! Sumaste ${Math.round(puntosMaximosPregunta * 0.5 + bonusRapidez)} puntos. ${pregunta.explicacion || "La respuesta elegida fue la correcta."}`;
+    mensajeExplicacion = `¡Correcto! Sumaste ${Math.round(puntosPorAcierto + bonusRapidez)} puntos. ${pregunta.explicacion || "La respuesta elegida fue la correcta."}`;
     reproducirSonido("correcta");
   } else {
     botones[elegida].style.backgroundColor = "#f44336"; // Rojo
